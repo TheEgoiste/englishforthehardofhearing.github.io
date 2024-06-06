@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="2021-03-09_252f1a28-160b-4f72-aecc-aa6ceab2487a-Ingles.png" sizes="32x32">
+    <title>Общий чат</title>
+    <link rel="stylesheet" href="чат.css">
+    <style>
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #messages li {
+            padding: 5px 10px;
+        }
+
+        #messages li:nth-child(odd) {
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="messages"></ul>
+    <form id="chat-form">
+        <input id="chat-input" autocomplete="off" /><button>Отправить</button>
+    </form>
+
+    <script src="socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        var form = document.getElementById('chat-form');
+        var input = document.getElementById('chat-input');
+        var messages = document.getElementById('messages');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (input.value) {
+                socket.emit('chat message', input.value);
+                input.value = '';
+            }
+        });
+
+        socket.on('chat message', function (msg) {
+            var item = document.createElement('li');
+            item.textContent = msg;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
+</body>
+
+</html>

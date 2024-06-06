@@ -35,3 +35,49 @@ function sendMessage() {
         }, 2000);
     }
 }
+const startLessonButton = document.querySelector('.js-start-lesson');
+const tutorsButton = document.querySelector('.js-tutors');
+const startVoiceControlButton = document.querySelector('.js-start-voice-control');
+const voiceControlStatus = document.querySelector('.voice-control-status');
+
+let recognition;
+
+startVoiceControlButton.addEventListener('click', () => {
+    if (!recognition) {
+        initVoiceControl();
+    }
+    toggleVoiceControl();
+});
+
+function initVoiceControl() {
+    recognition = new window.webkitSpeechRecognition() || new window.SpeechRecognition();
+    recognition.interimResults = false;
+    recognition.lang = 'ru-RU';
+
+    recognition.addEventListener('result', (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        handleVoiceCommand(transcript);
+    });
+
+    recognition.addEventListener('end', () => {
+        toggleVoiceControl();
+    });
+}
+
+function toggleVoiceControl() {
+    if (recognition.state === 'listening') {
+        recognition.stop();
+        voiceControlStatus.style.display = 'none';
+    } else {
+        recognition.start();
+        voiceControlStatus.style.display = 'block';
+    }
+}
+
+function handleVoiceCommand(transcript) {
+    if (transcript.includes('начать')) {
+        startLessonButton.click();
+    } else if (transcript.includes('репетиторы')) {
+        tutorsButton.click();
+    }
+}
