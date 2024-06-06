@@ -84,9 +84,64 @@ header {
     border-radius: 20px;
 }
 
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .logo img {
+        height: 30px;
+    }
+
+    .logo-text {
+        font-size: 16px;
+    }
+
+    .nav-container {
+        margin: 10px 0;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links li {
+        margin: 5px 0;
+    }
+
+    .nav-links li a {
+        font-size: 14px;
+    }
+
+    .login-buttons {
+        flex-direction: column;
+    }
+
+    .login-buttons a {
+        margin: 5px 0;
+        font-size: 12px;
+    }
+
+    .login-btn,
+    .signup-btn {
+        margin: 5px 0;
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}
+
+
 /* Остальные стили остаются без изменений */
 
 /* Секция "О нас" */
+/* Стили для больших экранов */
 .about {
     display: flex;
     align-items: center;
@@ -105,7 +160,6 @@ header {
     font-size: 18px;
 }
 
-
 .about .image {
     flex: 1;
     text-align: right;
@@ -116,11 +170,46 @@ header {
     height: auto;
 }
 
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .about {
+        flex-direction: column;
+        padding: 30px;
+    }
+
+    .about .info {
+        order: 2;
+    }
+
+    .about .info h1 {
+        font-size: 40px;
+    }
+
+    .about .info p {
+        font-size: 16px;
+    }
+
+    .about .image {
+        order: 1;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .about .image img {
+        max-width: 80%;
+    }
+}
+
 /* Кнопка "Начать занятие" */
 .start-lesson {
     display: flex;
     justify-content: center;
     margin: 40px 0;
+}
+
+.video video{
+    max-width: 100%;
+    height: auto;
 }
 
 .video-label,
@@ -133,12 +222,15 @@ header {
 }
 
 /* Секция с видео и аудио */
+
 .video {
     display: flex;
     justify-content: center;
     padding: 50px 0;
     margin-bottom: 20px;
     margin-top: 10px;
+    max-width: 100%;
+    height: auto;
 }
 
 /* Дополнительные стили для центрирования элементов */
@@ -206,19 +298,32 @@ header {
 .grammar {
     display: flex;
     justify-content: center;
-    padding: 50px 0;
-    margin-top: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
 }
 
-.grammar .rule {
-    margin: 0 20px;
+.rule-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
 }
 
-.grammar .rule img {
-    max-width: 80%;
+.rule {
+    max-width: 400px;
+    width: 100%;
+}
+
+.rule img {
+    width: 100%;
     height: auto;
-    justify-content: center;
+    display: block;
+}
 
+.rule-text {
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Подвал */
@@ -321,7 +426,7 @@ footer {
 
 .chat-support {
     position: fixed;
-    bottom: 20px;
+    bottom: 125px;
     right: 20px;
     z-index: 999;
 }
@@ -384,10 +489,45 @@ footer {
     border-radius: 20px;
     cursor: pointer;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
 }
 
 .auto-response {
     background-color: #e6e6e6;
     color: #666;
     font-style: italic;
+}
+
+.voice-control {
+    position: fixed;
+    bottom: 125px;
+    left: 20px;
+    /* Изменено на left: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Изменено на align-items: flex-start; */
+    z-index: 999;
+}
+
+.voice-control .btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 20px;
+    background-color: #4B0082;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.voice-control .voice-control-status {
+    margin-top: 10px;
+    /* Добавлено margin-top: 10px; */
+    padding: 6px 12px;
+    font-size: 12px;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 4px;
 }
